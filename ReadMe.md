@@ -1,0 +1,1 @@
+git clone https://github.com/MohaElder/skill-demo-manual-grade.git && bash skill-demo-manual-grade/grade.sh ['data_params']
