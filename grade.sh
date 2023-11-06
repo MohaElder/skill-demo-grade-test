@@ -7,4 +7,4 @@ cp *.txt student/
 cp chat-server/HandlerTests.java student/chat-server
 cp chat-server/session.log student/chat-server
 echo $1 > data/data.json
-python3 skill-demo-manual-grade/skill_demo.py .
+python3 skill-demo-manual-grade/skill_demo.py . | grep -E '"score": [0-9]\.?([0-9]+)?'
