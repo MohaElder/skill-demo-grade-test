@@ -6,4 +6,4 @@ cp *.txt students/
 cp chat-server/HandlerTests.java students
 cp chat-server/sesion.log students
 echo $1 > data/data.json
-python3 skill-demo-manual-grade/skill-demo.py .
+python3 skill-demo-manual-grade/skill_demo.py .
