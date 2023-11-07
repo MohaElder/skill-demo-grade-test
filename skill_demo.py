@@ -89,8 +89,6 @@ def grade_root(file, data):
 (rootcorrect, _, _) = grade_root(root, data)
 
 def check_server_paths(logfile):
-  with open(logfile) as f: logtext = f.read() 
-  lines = logtext.split("\n")
   hasroot = False
   chatcount = 0
   hasuser = False
@@ -98,23 +96,28 @@ def check_server_paths(logfile):
   hasuser2 = False
   hasmessage2 = False
 
-  for l in lines:
-    if l.strip() == "/": hasroot = True
-    if l.startswith("/chat"): chatcount += 1
-    if data['params']['user'] in l: hasuser = True
-    if data['params']['message'] in l: hasmessage = True
-    if data['params']['user2'] in l: hasuser2 = True
-    if data['params']['message2'] in l: hasmessage2 = True
+  # Check if logfile exists before trying to open it
+  if os.path.exists(logfile):
+    with open(logfile) as f:
+      logtext = f.read() 
+    lines = logtext.split("\n")
+
+    for l in lines:
+      if l.strip() == "/": hasroot = True
+      if l.startswith("/chat"): chatcount += 1
+      if data['params']['user'] in l: hasuser = True
+      if data['params']['message'] in l: hasmessage = True
+      if data['params']['user2'] in l: hasuser2 = True
+      if data['params']['message2'] in l: hasmessage2 = True
 
   enoughchats = False
   if chatcount >= 3: enoughchats = True
-
   hasparams = hasuser and hasmessage and hasuser2 and hasmessage2
 
   return (hasroot, enoughchats, hasparams)
 
-(hasroot, enoughchats, hasparams) = check_server_paths(session)
-
+# Update the line where check_server_paths is called with the correct path
+(hasroot, enoughchats, hasparams) = check_server_paths(os.path.join(gradebase, "student", "chat-server", "session.log"))
 
 testnewexpect = """
 JUnit version 4.13.2
