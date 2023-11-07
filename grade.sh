@@ -1,5 +1,5 @@
 sudo apt-get update
-sudo apt-get install python
+sudo apt-get -y install python
 mkdir student
 mkdir student/chat-server
 mkdir data
